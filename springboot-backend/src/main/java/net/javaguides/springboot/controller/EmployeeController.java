@@ -69,16 +69,18 @@ public class EmployeeController {
 	// http://localhost:8080/api/employees/1
 	@DeleteMapping("{id}")
 	public ResponseEntity<String> deleteEmployee(@PathVariable("id") long id){
-		// delete employee from DB
 		return new ResponseEntity<String>(employeeService.deleteEmployee(id), HttpStatus.OK);
 	}
 	
-	// build delete employee REST API
-	// http://localhost:8080/api/employeess
+	// build delete list employee REST API
+	//for deleting all the employeees you have to pass an empty list as
+	// http://localhost:8080/api/employees
 	@DeleteMapping()
-	public ResponseEntity<String> deleteEmployeeList(@RequestBody List<Long> idList){
-		// delete employees from DB
-		return new ResponseEntity<String>(employeeService.deleteEmployeeList(idList), HttpStatus.OK);
+	public ResponseEntity<String> deleteEmployeeList(@RequestBody Integer[] idList){
+		Long[] newIdList = new Long[idList.length];
+		for (int i = 0; i < idList.length; i++) {
+			newIdList[i] = Integer.toUnsignedLong(idList[i]);
+		}
+		return new ResponseEntity<String>(employeeService.deleteEmployeeList(newIdList), HttpStatus.OK);
 	}
-	
 }

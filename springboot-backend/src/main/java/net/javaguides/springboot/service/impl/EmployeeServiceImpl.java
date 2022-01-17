@@ -66,20 +66,26 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public String deleteEmployeeList(List<Long> idList) {
+	public String deleteEmployeeList(Long[] idList) {
+		if(idList.length==0){
+			employeeRepository.deleteAll();
+			return new String("All the Employees deleted successfully!.");
+		}
 		String ans="Employees with ids: ";
 		Boolean flag= false;
-		for (Long id : idList) {
-			Optional<Employee> employee = employeeRepository.findById(id);
+		for (int i = 0; i < idList.length; i++) {
+			Optional<Employee> employee = employeeRepository.findById(idList[i]);
 			if(!employee.isPresent()) {
-				ans+=id.toString()+", ";
+				ans+=idList[i]+", ";
 				flag=true;
 			}	
 		}
 		if (flag)
 			return ans+="are not existings";
 		else {
-			employeeRepository.deleteAllById(idList);
+			for (int i = 0; i < idList.length; i++) {
+				employeeRepository.deleteById(idList[i]);
+			}
 			return new String("Employees deleted successfully!.");
 		}
 	}

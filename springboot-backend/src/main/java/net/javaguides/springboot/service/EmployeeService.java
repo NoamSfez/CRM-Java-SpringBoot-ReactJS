@@ -16,5 +16,5 @@ public interface EmployeeService {
 	
 	String deleteEmployee(long id);
 
-	String deleteEmployeeList(List<Long> idList);
+	String deleteEmployeeList(Long[] idList);
 }

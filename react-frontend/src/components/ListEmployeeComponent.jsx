@@ -8,52 +8,65 @@ class ListEmployeeComponent extends Component {
     this.state = {
       employees: [],
     };
-    // this.addEmployee = this.addEmployee.bind(this);
-    // this.editEmployee = this.editEmployee.bind(this);
-    // this.deleteEmployee = this.deleteEmployee.bind(this);
+    this.addEmployee = this.addEmployee.bind(this);
+    this.editEmployee = this.editEmployee.bind(this);
+    this.deleteEmployee = this.deleteEmployee.bind(this);
   }
-
-  //   deleteEmployee(id) {
-  //     EmployeeService.deleteEmployee(id).then((res) => {
-  //       this.setState({
-  //         employees: this.state.employees.filter(
-  //           (employee) => employee.id !== id
-  //         ),
-  //       });
-  //     });
-  //   }
-  //   viewEmployee(id) {
-  //     this.props.history.push(`/view-employee/${id}`);
-  //   }
-  //   editEmployee(id) {
-  //     this.props.history.push(`/add-employee/${id}`);
-  //   }
 
   async componentDidMount() {
     let employees = await EmployeeService.getEmployees();
     this.setState({ employees: employees.data });
+    //   componentDidMount() {
+    //     EmployeeService.getEmployees().then((res) =>
+    //       this.setState({ employees: res.data })
+    //     );
+    //   }
   }
-  //   componentDidMount() {
-  //     EmployeeService.getEmployees().then((res) =>
-  //       this.setState({ employees: res.data })
-  //     );
-  //   }
 
-  //   addEmployee() {
-  //     this.props.history.push("/add-employee/_add");
-  //   }
+  addEmployee() {
+    this.props.history.push("/add-employee/_add");
+    //ca nous envoi du coup vers l'url avec add-employee et comme ID:_add
+  }
+  editEmployee(id) {
+    this.props.history.push(`/add-employee/${id}`);
+  }
+  async deleteEmployee(id) {
+    await EmployeeService.deleteEmployee(id);
+    this.setState({
+      employees: this.state.employees.filter((employee) => employee.id !== id),
+    });
+  }
+
+  async deleteAllEmployee() {
+    await this.state.employees.map((employee) =>
+      EmployeeService.deleteEmployee(employee.id)
+    );
+    this.setState({
+      employees: [],
+    });
+  }
+
+  viewEmployee(id) {
+    this.props.history.push(`/view-employee/${id}`);
+  }
 
   render() {
     return (
       <div>
         <h2 className="text-center">Employees List</h2>
-        {/* <div className="row">
+        <div className="row">
           <button className="btn btn-primary" onClick={this.addEmployee}>
-            {" "}
             Add Employee
           </button>
+          <button
+            style={{ marginLeft: "10px" }}
+            className="btn btn-danger"
+            onClick={() => this.deleteAllEmployee()}
+          >
+            Delete All Employees
+          </button>
         </div>
-        <br></br> */}
+        <br></br>
         <div className="row">
           <table className="table table-striped table-bordered">
             <thead>
@@ -70,27 +83,27 @@ class ListEmployeeComponent extends Component {
                 <tr key={employee.id}>
                   <td> {employee.firstName} </td>
                   <td> {employee.lastName}</td>
-                  <td> {employee.emailId}</td>
+                  <td> {employee.email}</td>
                   <td>
                     <button
                       onClick={() => this.editEmployee(employee.id)}
                       className="btn btn-info"
                     >
-                      Update{" "}
+                      Update
                     </button>
                     <button
                       style={{ marginLeft: "10px" }}
                       onClick={() => this.deleteEmployee(employee.id)}
                       className="btn btn-danger"
                     >
-                      Delete{" "}
+                      Delete
                     </button>
                     <button
                       style={{ marginLeft: "10px" }}
                       onClick={() => this.viewEmployee(employee.id)}
                       className="btn btn-info"
                     >
-                      View{" "}
+                      View
                     </button>
                   </td>
                 </tr>
