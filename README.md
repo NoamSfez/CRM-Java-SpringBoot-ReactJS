@@ -3,7 +3,7 @@
 ### Project Description
 
 Implementation of a basic Customer Relationship Management (CRM) system by consuming a REST API.
-The backend system is developped in JAVA with Spring Boot and the client-side with JavaScript and ReactJS Library.  
+The backend system is developped in Java with Spring Boot and the client-side with JavaScript and ReactJS Library.  
 
 ### Project Technologies
 
