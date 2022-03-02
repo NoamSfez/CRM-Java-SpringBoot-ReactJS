@@ -1,4 +1,4 @@
-## RESTful-api-Customer-SpringBoot-ReactJS
+## CRM-Java-SpringBoot-ReactJS
 
 ### Project Description
 
