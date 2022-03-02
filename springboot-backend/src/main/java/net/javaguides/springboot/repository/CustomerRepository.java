@@ -2,9 +2,9 @@ package net.javaguides.springboot.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import net.javaguides.springboot.model.Employee;
+import net.javaguides.springboot.model.Customer;
 
-public interface EmployeeRepository extends JpaRepository<Employee, Long>{
+public interface CustomerRepository extends JpaRepository<Customer, Long>{
 
 }
 
