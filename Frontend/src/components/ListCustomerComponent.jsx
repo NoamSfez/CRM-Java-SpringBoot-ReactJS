@@ -46,7 +46,7 @@ class ListCustomerComponent extends Component {
     });
   }
 
-  viewcustomer(id) {
+  viewCustomer(id) {
     this.props.history.push(`/view-customer/${id}`);
   }
 

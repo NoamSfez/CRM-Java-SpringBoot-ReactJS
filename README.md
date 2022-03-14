@@ -11,6 +11,9 @@ Java, Spring Boot, Maven, MySQL, Axios, JavaScript ES6, ReactJS, REST API, GitHu
 
 ### Launch Servers:
 
+Java backend server run on 8080 port and need MySQL on 3306 port.
+ReactJS frontend server run on 3000 port.
+
 #### Java Backend:
 
 With Jar file methods:
@@ -28,3 +31,8 @@ $ mvn -Dmaven.test.skip=true spring-boot:run
 ```
 
 #### JavaScript FrontEnd:
+
+```bash
+$ cd react-frontend
+$ npm start
+```
