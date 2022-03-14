@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import EmployeeService from "../services/EmployeeService";
-import { Link } from "react-router-dom";
+import CustomerService from "../services/CustomerService";
+// import { Link } from "react-router-dom";
 
-class CreateEmployeeComponent extends Component {
+class CreateCustomerComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -21,10 +21,10 @@ class CreateEmployeeComponent extends Component {
     if (this.state.id === "_add") {
       return;
     } else {
-      let employee = (await EmployeeService.getEmployeeById(this.state.id))
+      let customer = (await CustomerService.getCustomerById(this.state.id))
         .data;
       this.setState({
-        employee,
+        customer,
       });
     }
   }
@@ -33,7 +33,7 @@ class CreateEmployeeComponent extends Component {
   //   if (this.state.id === "_add") {
   //     return;
   //   } else {
-  //     EmployeeService.getEmployeeById(this.state.id).then((res) => {
+  //     CustomerService.getEmployeeById(this.state.id).then((res) => {
   //       let employee = res.data;
   //       this.setState({
   //         firstName: employee.firstName,
@@ -44,28 +44,28 @@ class CreateEmployeeComponent extends Component {
   //   }
   // }
 
-  saveOrUpdateEmployee = async (e) => {
+  saveOrUpdateCustomer = async (e) => {
     e.preventDefault();
-    let employee = {
+    let customer = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
     };
-    console.log("employee => " + JSON.stringify(employee));
+    console.log("customer => " + JSON.stringify(customer));
     // step 5
 
     this.state.id === "_add"
-      ? await EmployeeService.createEmployee(employee)
-      : await EmployeeService.updateEmployee(employee, this.state.id);
-    this.props.history.push("/employees");
+      ? await CustomerService.createCustomer(customer)
+      : await CustomerService.updateCustomer(customer, this.state.id);
+    this.props.history.push("/customers");
 
     // if (this.state.id === "_add") {
-    //   EmployeeService.createEmployee(employee).then(() => {
-    //     this.props.history.push("/employees");
+    //   CustomerService.createCustomer(customer).then(() => {
+    //     this.props.history.push("/customers");
     //   });
     // } else {
-    //   EmployeeService.updateEmployee(employee, this.state.id).then(() => {
-    //     this.props.history.push("/employees");
+    //   CustomerService.updateCustomer(customer, this.state.id).then(() => {
+    //     this.props.history.push("/customers");
     //   });
     // }
   };
@@ -83,14 +83,14 @@ class CreateEmployeeComponent extends Component {
   };
 
   cancel() {
-    this.props.history.push("/employees");
+    this.props.history.push("/customers");
   }
 
   getTitle() {
     if (this.state.id === "_add") {
-      return <h3 className="text-center">Add Employee</h3>;
+      return <h3 className="text-center">Add Customer</h3>;
     } else {
-      return <h3 className="text-center">Update Employee</h3>;
+      return <h3 className="text-center">Update Customer</h3>;
     }
   }
 
@@ -137,7 +137,7 @@ class CreateEmployeeComponent extends Component {
 
                   <button
                     className="btn btn-success"
-                    onClick={this.saveOrUpdateEmployee}
+                    onClick={this.saveOrUpdateCustomer}
                   >
                     Save
                   </button>
@@ -149,7 +149,7 @@ class CreateEmployeeComponent extends Component {
                     Cancel
                   </button>
                   {/* <Link
-                    to={"/employees"}
+                    to={"/customers"}
                     className="btn btn-danger"
                     style={{ marginLeft: "10px" }}
                   >
@@ -165,4 +165,4 @@ class CreateEmployeeComponent extends Component {
   }
 }
 
-export default CreateEmployeeComponent;
+export default CreateCustomerComponent;
